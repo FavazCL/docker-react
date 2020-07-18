@@ -1,9 +1,9 @@
 # First Phase - Build
-FROM node:alpine as builder 
+FROM node:alpine
 
 WORKDIR '/app'
 
-COPY package.json .
+COPY package*.json ./
 
 RUN npm install
 
@@ -18,5 +18,5 @@ EXPOSE 80
 
 # Copiamos el resultado de la primera fase, el segundo arg, especifica que queremos copiar
 # y el tercer arg. donde lo queremos introducir
-COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=0 /app/build /usr/share/nginx/html
 
